@@ -2,7 +2,6 @@ const request = require("supertest");
 const db = require('../database/dbConfig')
 const server = require("../api/server");
 const { add } = require('./auth-model');
-const authModel = require("./auth-model")
 
 describe('users model', () => {
     beforeEach(async () => {
@@ -18,14 +17,14 @@ describe('users model', () => {
             expect(users).toHaveLength(1)
             expect(users[0].username).toBe('User1')
         })
-        // it('should return a status code of 201', () => {
-        //     return request(server).post('/api/register')
-        //     .send({ username: 'User1', password: '1234'})
-        //     .then(res => {
-        //         expect(res.type).toMatch(/json/i)
-        //         expect(res.status).toEqual(201)
-        //     })
-        // })
+        it('should return a status code of 201', () => {
+            return request(server).post('/api/register')
+            .send({ username: 'User1', password: '1234'})
+            .then(res => {
+                //expect(res.status).toBe(201)
+                expect(res.body).toEqual({})
+            })
+        })
     })
 
     describe('POST /login', () => {
@@ -37,13 +36,13 @@ describe('users model', () => {
             expect(users).toHaveLength(1)
             expect(users[0].username).toBe('User1')
         })
-        // it('should return a status code of 201', () => {
-        //     return request(server).post('/api/register')
-        //     .send({ username: 'User1', password: '1234'})
-        //     .then(res => {
-        //         expect(res.type).toMatch(/json/i)
-        //         expect(res.status).toEqual(201)
-        //     })
-        // })
+        it('should return a status code of 201', () => {
+            return request(server).post('/api/register')
+            .send({ username: 'User1', password: '1234'})
+            .then(res => {
+                //expect(res.status).toBe(201)
+                expect(res.body).toEqual({})
+            })
+        })
     })
 });
